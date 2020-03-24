@@ -9,13 +9,19 @@ import java.awt.event.ActionListener;
 */
 public class Controller implements ActionListener {
 	
+	public Model model;
+	Dashboard view;
+	
 	public Controller() {
+		
+		view = new Dashboard(this);
+		model = new Model();
 		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
