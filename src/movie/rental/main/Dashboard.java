@@ -1,6 +1,5 @@
 package movie.rental.main;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
@@ -44,7 +43,7 @@ public class Dashboard extends JFrame {
 	
 	private void components() {
 
-        
+        // Here we will have all the components to load the Dashboard view
 		JPanel panel1 = new JPanel();
 		panel1.setBackground(Color.LIGHT_GRAY);
 		
