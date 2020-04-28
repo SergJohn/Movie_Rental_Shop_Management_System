@@ -20,9 +20,11 @@ public class Controller implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent e) {
 		
-		
+		if(e.getActionCommand().equals("customer_menu")) {
+			System.out.println("Open view with customer options");
+		}
 	}
 
 }
