@@ -85,7 +85,7 @@ public class ArchiveDash extends JFrame{
 		
 		JButton goBack = new JButton("GO BACK");
 		goBack.addActionListener((ActionListener) controller);
-		goBack.setActionCommand("go_back");
+		goBack.setActionCommand("go_back_items");
 		
 		// Adding everything to its panels
 		panel1.add(welcomeLabel);

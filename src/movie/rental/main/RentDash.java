@@ -72,12 +72,17 @@ public class RentDash extends JFrame{
 		// Buttons
 		JButton goBack = new JButton("GO BACK");
 		goBack.addActionListener((ActionListener) controller);
-		goBack.setActionCommand("go_back");
+		goBack.setActionCommand("go_back_rent");
+		
+		JButton rent = new JButton("Proceed rent");
+		rent.addActionListener((ActionListener) controller);
+		rent.setActionCommand("proceed_rent");
 		
 		// Adding everything to its panels
 		panel1.add(welcomeLabel);
 		panel1.add(Box.createRigidArea(new Dimension(50,50)));
 		panel2.add(goBack);
+		panel3.add(rent);
 		
 		
 	}
