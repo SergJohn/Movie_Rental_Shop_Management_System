@@ -11,7 +11,7 @@ import java.sql.Statement;
 */
 public class Model {
 	
-	String dbServer = "jdbc:mysql://'address'/'dbname'";
+	String dbServer = "jdbc:mysql://'localhost'/'UltraVision'";
     String user = "root";
     String password = "rootpass";
     Connection conn = null;
