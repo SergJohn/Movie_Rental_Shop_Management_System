@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import movie.rental.titles.MovieList;
+import movie.rental.titles.MusicList;
 
 /**
 *
@@ -17,6 +18,7 @@ public class Controller implements ActionListener {
 	ArchiveDash itemsOptions;
 	RentDash rentDash;
 	MovieList movieList;
+	MusicList musicList;
 	
 	public Controller() {
 		
@@ -88,6 +90,10 @@ public class Controller implements ActionListener {
 		 * Displaying lists and its go_back buttons
 		 * */
 		
+		/*
+		 * Movie's list
+		 * */
+		
 		// Opening movie_list view
 		else if(e.getActionCommand().equals("movie_list")) {
 			System.out.println("Going to movie list");
@@ -100,6 +106,24 @@ public class Controller implements ActionListener {
 			System.out.println("Going to Titles Dash");
 			itemsOptions.setVisible(true);
 			movieList.dispose();
+			
+		}
+		
+		/*
+		 * Music's list
+		 * */
+		
+		else if(e.getActionCommand().equals("music_list")) {
+			System.out.println("Going to music list");
+			itemsOptions.setVisible(false);
+			musicList = new MusicList(this);
+			
+		}
+		// Going back to archive's view
+		else if(e.getActionCommand().equals("go_back_archive")) {
+			System.out.println("Going to Titles Dash");
+			itemsOptions.setVisible(true);
+			musicList.dispose();
 			
 		}
 		
