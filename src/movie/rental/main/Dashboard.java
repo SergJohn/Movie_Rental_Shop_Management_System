@@ -57,11 +57,11 @@ public class Dashboard extends JFrame {
 		cusBtn.addActionListener((ActionListener) controller);
 		cusBtn.setActionCommand("customer_menu");
 		
-		JButton archivesBtn = new JButton("Archives");
+		JButton archivesBtn = new JButton("Titles");
 		archivesBtn.addActionListener((ActionListener) controller);
 		archivesBtn.setActionCommand("archive_menu");
 		
-		JButton rentBtn = new JButton("Renting");
+		JButton rentBtn = new JButton("Rent");
 		rentBtn.addActionListener((ActionListener) controller);
 		rentBtn.setActionCommand("rent_menu");
 		
