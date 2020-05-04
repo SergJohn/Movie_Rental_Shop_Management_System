@@ -3,6 +3,7 @@ package movie.rental.titles;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Box;
@@ -98,6 +99,26 @@ public class AddNewTitle extends JFrame {
 		addNewTitle.addActionListener((ActionListener) controller);
 		addNewTitle.setActionCommand("add_new_title");
 		
+		// Adding an Anonymous ActionListener
+		JButton clear = new JButton("Clear");
+		clear.setActionCommand("clear");
+		clear.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				if(e.getActionCommand().equals("clear")) {
+					name.setText(null);
+					director.setText(null);
+					genre.setText(null);
+					duration.setText(null);
+					media.setText(null);
+					year.setText(null);
+					membership.setText(null);
+				}
+			}
+		});
+		
 		// Declaring TextFields
         name = new JTextField(20);
         director = new JTextField(20);
@@ -134,7 +155,8 @@ public class AddNewTitle extends JFrame {
      	panel1.add(year);
      	panel1.add(memberships_membership_id);
      	panel1.add(membership);
-     	panel1.add(addNewTitle);	
+     	panel1.add(addNewTitle);
+     	panel1.add(clear);
 	}
 	
 	private void validation() {
