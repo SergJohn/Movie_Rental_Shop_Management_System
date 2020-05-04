@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import movie.rental.titles.MovieList;
 import movie.rental.titles.MusicList;
+import movie.rental.titles.TVBoxList;
 
 /**
 *
@@ -19,6 +20,7 @@ public class Controller implements ActionListener {
 	RentDash rentDash;
 	MovieList movieList;
 	MusicList musicList;
+	TVBoxList tvBoxList;
 	
 	public Controller() {
 		
@@ -98,15 +100,13 @@ public class Controller implements ActionListener {
 		else if(e.getActionCommand().equals("movie_list")) {
 			System.out.println("Going to movie list");
 			itemsOptions.setVisible(false);
-			movieList = new MovieList(this);
-			
+			movieList = new MovieList(this);	
 		}
 		// Going back to archive's view
 		else if(e.getActionCommand().equals("go_back_archive")) {
 			System.out.println("Going to Titles Dash");
 			itemsOptions.setVisible(true);
-			movieList.dispose();
-			
+			movieList.dispose();	
 		}
 		
 		/*
@@ -116,16 +116,32 @@ public class Controller implements ActionListener {
 		else if(e.getActionCommand().equals("music_list")) {
 			System.out.println("Going to music list");
 			itemsOptions.setVisible(false);
-			musicList = new MusicList(this);
-			
+			musicList = new MusicList(this);	
 		}
 		// Going back to archive's view
-		else if(e.getActionCommand().equals("go_back_archive")) {
+		else if(e.getActionCommand().equals("go_back_archive_from_music")) {
 			System.out.println("Going to Titles Dash");
 			itemsOptions.setVisible(true);
-			musicList.dispose();
-			
+			musicList.dispose();	
 		}
+		
+		/*
+		 * TVBox's list
+		 * */
+		
+		else if(e.getActionCommand().equals("tv_box_list")) {
+			System.out.println("Going to TV Box list");
+			itemsOptions.setVisible(false);
+			tvBoxList = new TVBoxList(this);	
+		}
+		// Going back to archive's view
+		else if(e.getActionCommand().equals("go_back_archive_from_TVBox")) {
+			System.out.println("Going to Titles Dash");
+			itemsOptions.setVisible(true);
+			tvBoxList.dispose();	
+		}
+		
+		
 		
 	}
 

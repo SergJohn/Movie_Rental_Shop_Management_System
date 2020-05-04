@@ -13,31 +13,31 @@ import javax.swing.JTable;
 
 import movie.rental.main.Controller;
 
-public class MusicList extends JFrame {
+public class TVBoxList extends JFrame{
 	
 	private Controller controller;
 	
-	public MusicList(Controller controller) {
+	public TVBoxList(Controller controller) {
 		
 		this.controller = controller;
 		
 		attributesSetter();
         components();
         validation();
-        
+		
 	}
 	
 	private void attributesSetter() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.setSize(500,500);
-        this.setTitle("Music Titles List");
+        this.setTitle("TV Box Titles List");
 		
 	}
 	
 	private void components() {
 
-        // Here we will have all the components to load the View of Music's list
+        // Here we will have all the components to load the View of TVBox's list
 		// Border Layout
 		BorderLayout border = new BorderLayout();
 		this.setLayout(border);
@@ -62,7 +62,7 @@ public class MusicList extends JFrame {
 		this.add(panel3, BorderLayout.SOUTH);
 		
 		// Label
-		JLabel welcomeLabel = new JLabel("Music");
+		JLabel welcomeLabel = new JLabel("TVBox");
 		
 		// Table with movie's list
 		
@@ -70,7 +70,7 @@ public class MusicList extends JFrame {
 		
 		String[] columnNames = {"id", "name", "director", "genre", "duration", "media", "year", "membership"};
 		
-		data = controller.model.musicList();
+		data = controller.model.tvBoxList();
 		
 		JTable myTable = new JTable(data, columnNames);
 		
@@ -84,7 +84,7 @@ public class MusicList extends JFrame {
 		// Buttons
 		JButton goBack = new JButton("GO BACK");
 		goBack.addActionListener((ActionListener) controller);
-		goBack.setActionCommand("go_back_archive_from_music");
+		goBack.setActionCommand("go_back_archive_from_TVBox");
 		
 		JButton rent = new JButton("Proceed rent");
 		rent.addActionListener((ActionListener) controller);
