@@ -3,6 +3,7 @@ package movie.rental.main;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import movie.rental.titles.AddNewTitle;
 import movie.rental.titles.LiveConcertList;
 import movie.rental.titles.MovieList;
 import movie.rental.titles.MusicList;
@@ -23,6 +24,7 @@ public class Controller implements ActionListener {
 	MusicList musicList;
 	TVBoxList tvBoxList;
 	LiveConcertList liveConcertList;
+	AddNewTitle addNewTitleView;
 	
 	public Controller() {
 		
@@ -157,6 +159,23 @@ public class Controller implements ActionListener {
 			System.out.println("Going to Titles Dash");
 			itemsOptions.setVisible(true);
 			liveConcertList.dispose();	
+		}
+		
+		/*
+		 * Adding new title
+		 * */
+		
+		// View to get new title's information
+		else if(e.getActionCommand().equals("add_new_title_view")) {
+			System.out.println("Opening view of adding new title");
+			addNewTitleView = new AddNewTitle(this);
+			itemsOptions.setVisible(false);
+		}
+		// Going back to archive's view
+		else if(e.getActionCommand().equals("go_back_archive_from_add_new_title")) {
+			System.out.println("Going to Titles Dash");
+			itemsOptions.setVisible(true);
+			addNewTitleView.dispose();	
 		}
 		
 		

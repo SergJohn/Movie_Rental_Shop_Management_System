@@ -77,7 +77,7 @@ public class ArchiveDash extends JFrame{
 		// Btn to add a new title
 		JButton addTitle = new JButton("Add new title");
 		addTitle.addActionListener((ActionListener) controller);
-		addTitle.setActionCommand("add_new_title");
+		addTitle.setActionCommand("add_new_title_view");
 		
 		// Btn to update a existent title
 		JButton updateTitle = new JButton("Update title");
