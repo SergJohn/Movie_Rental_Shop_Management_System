@@ -21,6 +21,7 @@ public class Model {
     Connection conn = null;
     Statement stmt = null;
     
+    // Model Constructor
 	public Model(){
 	        
 	        try{
@@ -47,6 +48,27 @@ public class Model {
 	        }
 	        
 	    }
+	
+	// Using an Inner Class to add a completion message
+	class addMessage extends JFrame implements movie.rental.interfaces.Message{
+		
+		public addMessage() {
+			addMessage();
+		}
+		@Override
+		public void addMessage() {
+			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	        //Setting visible to false in order to show only the JPtioinPane, not the Frame
+	        this.setVisible(false);
+	        this.setSize(300,300);
+	        
+	        JOptionPane.showMessageDialog(this, "Title added!");
+	        
+	        this.validate();
+	        this.repaint();
+		}
+		
+	}
 
 	/**
 	 * 
@@ -320,6 +342,7 @@ public class Model {
 							+ ", '"+ year +"', '"+ membership +"')" ;
 			
 			stmt.execute(query);
+			new addMessage();
 			
 		}catch( SQLException se) {
 			System.out.println("SQL Exception:");
