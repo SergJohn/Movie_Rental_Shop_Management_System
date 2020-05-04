@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 
 public class ArchiveDash extends JFrame{
 	
+	public JTextField findTitleTxt;
 	private Controller controller;
 	
 	public ArchiveDash(Controller controller) {
@@ -79,11 +80,6 @@ public class ArchiveDash extends JFrame{
 		addTitle.addActionListener((ActionListener) controller);
 		addTitle.setActionCommand("add_new_title_view");
 		
-		// Btn to update a existent title
-		JButton updateTitle = new JButton("Update title");
-		updateTitle.addActionListener((ActionListener) controller);
-		updateTitle.setActionCommand("update_title");
-		
 		// Btn to display the list of movie titles
 		JButton movieList = new JButton("Movie");
 		movieList.addActionListener((ActionListener) controller);
@@ -105,7 +101,7 @@ public class ArchiveDash extends JFrame{
 		liveConcertList.setActionCommand("live_concert_list");
 		
 		// TextField to make the search on titles
-		JTextField findTitleTxt = new JTextField(15);
+		findTitleTxt = new JTextField(15);
 		
 		// Btn to search the titles
 		JButton findTitle = new JButton("Find title");
@@ -127,7 +123,6 @@ public class ArchiveDash extends JFrame{
 		panel1.add(tvBoxList);
 		panel1.add(liveConcertList);
 		panel1.add(addTitle);
-		panel1.add(updateTitle);
 		
 		// Buttons on panel2
 		panel2.add(goBack);

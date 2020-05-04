@@ -25,6 +25,7 @@ public class Controller implements ActionListener {
 	TVBoxList tvBoxList;
 	LiveConcertList liveConcertList;
 	AddNewTitle addNewTitleView;
+	TitleFound titleFound;
 	
 	public Controller() {
 		
@@ -184,12 +185,29 @@ public class Controller implements ActionListener {
 			String name = addNewTitleView.name.getText();
 			String director = addNewTitleView.director.getText();
 			String genre = addNewTitleView.genre.getText();
-			String duration = addNewTitleView.duration.getText();
+			int duration = Integer.parseInt(addNewTitleView.duration.getText());
 			String media = addNewTitleView.media.getText();
-			String year = addNewTitleView.year.getText();
-			String membership = addNewTitleView.membership.getText();
+			int year = Integer.parseInt(addNewTitleView.year.getText());
+			int membership = Integer.parseInt(addNewTitleView.membership.getText());
 			// Calling model and passing arguments
 			model.addNewTitle(name, director, genre, duration, media, year, membership);
+		}
+		
+		/*
+		 * Finding a title
+		 * */
+		
+		// Opening view to display found title
+		else if(e.getActionCommand().equals("find_title")) {
+			
+			String title = itemsOptions.findTitleTxt.getText();
+			itemsOptions.setVisible(false);
+			titleFound = new TitleFound(this, title);
+		}
+		// Going back title's Dash from found title
+		else if(e.getActionCommand().equals("go_back_archive_from_found_title")) {
+			titleFound.dispose();
+			itemsOptions.setVisible(true);
 		}
 		
 		
