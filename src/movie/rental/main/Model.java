@@ -45,6 +45,12 @@ public class Model {
 	        
 	    }
 
+	/**
+	 * 
+	 * Method String[][] movieList()
+	 * return String[][] with data from DB
+	 * 
+	 * */
 	public String[][] movieList() {
 		
 		String[][] data = null;
@@ -54,6 +60,7 @@ public class Model {
 			String query = "SELECT * FROM titles;";
 			String query_two = "SELECT * FROM titles WHERE memberships_membership_id = 2;"; 
 			
+			// Using the first query to find out how many lines of content we have in DB
 			ResultSet rs = stmt.executeQuery(query);
 			
 			int line = 0;
@@ -61,6 +68,7 @@ public class Model {
 				line++;
 			}
 			
+			// Using the second query to collect the data and insert into the variable to be returned
 			ResultSet rs2 = stmt.executeQuery(query_two);
 			
 			data = new String[line][8];
@@ -76,6 +84,7 @@ public class Model {
 									rs2.getString("title_year") + "\t" + 
 									rs2.getString("memberships_membership_id"));
 				
+				// Adding data from DB into Data[][]
 				data[row][0] = rs2.getString("title_id");
 				data[row][1] = rs2.getString("title_name");
 				data[row][2] = rs2.getString("title_director");
@@ -87,13 +96,10 @@ public class Model {
 				row++;
 			}
 			
-			//return data;
-			
-			
 		}catch( SQLException se ){
 			System.out.println( "SQL Exception:" );
 			
-			// Loop through the SQL Exceptions
+			// Looping through the SQL Exceptions
 			while( se != null ){
 				System.out.println( "State  : " + se.getSQLState()  ) ;
 				System.out.println( "Message: " + se.getMessage()   ) ;

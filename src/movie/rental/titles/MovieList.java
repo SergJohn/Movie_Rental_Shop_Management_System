@@ -58,9 +58,6 @@ public class MovieList extends JFrame{
 		
 		this.add(panel2, BorderLayout.NORTH);
 		
-//		panel2.setLayout(new BoxLayout(panel2, BoxLayout.PAGE_AXIS));
-//		panel2.add(Box.createRigidArea(new Dimension(200,0)));
-		
 		// Panel 3
 		JPanel panel3 = new JPanel();
 		panel3.setBackground(Color.LIGHT_GRAY);
@@ -101,7 +98,6 @@ public class MovieList extends JFrame{
 		panel1.add(myPane);
 		panel2.add(goBack);
 		panel3.add(rent);
-		
 		
 	}
 	
