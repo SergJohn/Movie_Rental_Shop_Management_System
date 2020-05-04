@@ -177,6 +177,20 @@ public class Controller implements ActionListener {
 			itemsOptions.setVisible(true);
 			addNewTitleView.dispose();	
 		}
+		// Sending title's information to model to proceed with db registration
+		else if(e.getActionCommand().equals("add_new_title")) {
+			
+			// Getting data from JTextFields
+			String name = addNewTitleView.name.getText();
+			String director = addNewTitleView.director.getText();
+			String genre = addNewTitleView.genre.getText();
+			String duration = addNewTitleView.duration.getText();
+			String media = addNewTitleView.media.getText();
+			String year = addNewTitleView.year.getText();
+			String membership = addNewTitleView.membership.getText();
+			// Calling model and passing arguments
+			model.addNewTitle(name, director, genre, duration, media, year, membership);
+		}
 		
 		
 		

@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
 *
 * @author mrosa
@@ -307,6 +310,32 @@ public class Model {
 		}
 		
 		return data;
+	}
+
+	public void addNewTitle(String name, String director, String genre, String duration, String media, String year, String membership) {
+		
+		try {
+			String query = "INSERT INTO titles (title_name, title_director, title_genre, title_duration, title_media, title_year, memberships_membership_id)"
+					+ " VALUES ('"+ name +"', '"+ director +"', '"+ genre +"', '"+ duration +"', '"+ media +"'"
+							+ ", '"+ year +"', '"+ membership +"')" ;
+			
+			stmt.execute(query);
+			
+		}catch( SQLException se) {
+			System.out.println("SQL Exception:");
+			
+			// Loop through the SQL Exceptions
+            while( se != null ){
+                System.out.println( "State  : " + se.getSQLState()  ) ;
+                System.out.println( "Message: " + se.getMessage()   ) ;
+                System.out.println( "Error  : " + se.getErrorCode() ) ;
+
+                se = se.getNextException() ;
+            }
+		}catch( Exception e ){
+            System.out.println( e ) ;
+    }
+		
 	}
 
 }
