@@ -543,4 +543,65 @@ public class Model {
     }
 	}
 
+	public String[][] findCustomer(String customer) {
+		
+		String[][] data = null;
+		
+		try {
+			
+			String query = "SELECT * FROM customers;";
+			String query_two = "SELECT * FROM customers WHERE cust_id LIKE '%"+customer+"%' OR "
+					+ " cust_name LIKE '%"+customer+"%' OR "
+					+ " cust_phone_no LIKE '%"+customer+"%' OR "
+					+ " cust_email LIKE '%"+customer+"%' OR "
+					+ " cust_address LIKE '%"+customer+"%';"; 
+			
+			// Using the first query to find out how many lines of content we have in DB
+			ResultSet rs = stmt.executeQuery(query);
+			
+			int line = 0;
+			while(rs.next()) {
+				line++;
+			}
+			
+			// Using the second query to collect the data and insert into the variable to be returned
+			ResultSet rs2 = stmt.executeQuery(query_two);
+			
+			data = new String[line][5];
+			int row = 0;
+			
+			while(rs2.next()) {
+				System.out.println(rs2.getString("cust_id") + "\t" + 
+									rs2.getString("cust_name") + "\t" +
+									rs2.getString("cust_phone_no") + "\t" +
+									rs2.getString("cust_email") + "\t" + 
+									rs2.getString("cust_address"));
+				
+				// Adding data from DB into Data[][]
+				data[row][0] = rs2.getString("cust_id");
+				data[row][1] = rs2.getString("cust_name");
+				data[row][2] = rs2.getString("cust_phone_no");
+				data[row][3] = rs2.getString("cust_email");
+				data[row][4] = rs2.getString("cust_address");
+				row++;
+			}
+			
+		}catch( SQLException se ){
+			System.out.println( "SQL Exception:" );
+			
+			// Looping through the SQL Exceptions
+			while( se != null ){
+				System.out.println( "State  : " + se.getSQLState()  ) ;
+				System.out.println( "Message: " + se.getMessage()   ) ;
+				System.out.println( "Error  : " + se.getErrorCode() ) ;
+
+				se = se.getNextException() ;
+			}
+		}catch( Exception e ){
+			System.out.println( e ) ;
+		}
+		
+		return data;
+	}
+
 }

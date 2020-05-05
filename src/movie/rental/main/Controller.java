@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import movie.rental.customers.AddNewCustomer;
+import movie.rental.customers.CustomerFound;
 import movie.rental.customers.UpdateCustomerSubscription;
 import movie.rental.titles.AddNewTitle;
 import movie.rental.titles.LiveConcertList;
@@ -30,6 +31,7 @@ public class Controller implements ActionListener {
 	TitleFound titleFound;
 	AddNewCustomer addNewCustomerView;
 	UpdateCustomerSubscription updateSubscription;
+	CustomerFound customerFound;
 	
 	public Controller() {
 		
@@ -258,6 +260,18 @@ public class Controller implements ActionListener {
 			String email = updateSubscription.email.getText();
 			String subscription = updateSubscription.subscription.getText();
 			model.updateSubscription(email, subscription);
+		}
+		// Finding customer
+		else if(e.getActionCommand().equals("find_customer_txt")) {
+			String customer = customerOptions.findCustomerTxt.getText();
+			System.out.println(customer);
+			customerOptions.setVisible(false);
+			customerFound = new CustomerFound(this, customer);
+		}
+		// Going back from customer found to customer options
+		else if(e.getActionCommand().equals("go_back_to_customer_options_from_customer_found")) {
+			customerFound.dispose();
+			customerOptions.setVisible(true);
 		}
 		
 		

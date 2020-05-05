@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 
 public class CustomerDash extends JFrame{
 	
+	JTextField findCustomerTxt;
 	private Controller controller;
 	
 	public CustomerDash(Controller controller) {
@@ -79,10 +80,10 @@ public class CustomerDash extends JFrame{
 		updateCustomer.addActionListener((ActionListener) controller);
 		updateCustomer.setActionCommand("update_subscription_view");
 		
-		JTextField findCustomerTxt = new JTextField(15);
+		findCustomerTxt = new JTextField(15);
 		JButton findCustomer = new JButton("Find customer");
 		findCustomer.addActionListener((ActionListener) controller);
-		findCustomer.setActionCommand("find_customer");
+		findCustomer.setActionCommand("find_customer_txt");
 		
 		JButton goBack = new JButton("GO BACK");
 		goBack.addActionListener((ActionListener) controller);
