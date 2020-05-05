@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 
 public class RentDash extends JFrame{
 	
-	public JTextField date;
+	public JTextField rentDate;
 	public JTextField customer;
 	public JTextField title1;
 	public JTextField title2;
@@ -54,18 +54,11 @@ public class RentDash extends JFrame{
 		
 		this.add(panel1, BorderLayout.CENTER);
 		
-//		panel1.setLayout(new BoxLayout(panel1, BoxLayout.PAGE_AXIS));
-//		this.add(panel1);
-//		panel1.add(Box.createRigidArea(new Dimension(100,100)));
-		
 		// Panel 2
 		JPanel panel2 = new JPanel();
 		panel2.setBackground(Color.DARK_GRAY);
 		
 		this.add(panel2, BorderLayout.NORTH);
-		
-//		panel2.setLayout(new BoxLayout(panel2, BoxLayout.PAGE_AXIS));
-//		panel2.add(Box.createRigidArea(new Dimension(200,0)));
 		
 		// Panel 3
 		JPanel panel3 = new JPanel();
@@ -80,6 +73,7 @@ public class RentDash extends JFrame{
 		JLabel title2_label = new JLabel("Second Title id");
 		JLabel title3_label = new JLabel("Third Title id");
 		JLabel title4_label = new JLabel("Fourth Title id");
+		JLabel rentDate_label = new JLabel("Date of rent - YYYY-MM-DD");
 		
 		// Buttons
 		JButton goBack = new JButton("GO BACK");
@@ -88,7 +82,7 @@ public class RentDash extends JFrame{
 		
 		JButton rent = new JButton("Rent");
 		rent.addActionListener((ActionListener) controller);
-		rent.setActionCommand("proceed_rent");
+		rent.setActionCommand("make_rent");
 		
 		// Declaring the TextField's
 		customer = new JTextField(20);
@@ -96,6 +90,7 @@ public class RentDash extends JFrame{
 		title2 = new JTextField(20);
 		title3 = new JTextField(20);
 		title4 = new JTextField(20);
+		rentDate = new JTextField(20);
 		
 		// Adding everything to its panels
 		panel1.add(welcomeLabel);
@@ -110,6 +105,8 @@ public class RentDash extends JFrame{
 		panel1.add(title3);
 		panel1.add(title4_label);
 		panel1.add(title4);
+		panel1.add(rentDate_label);
+		panel1.add(rentDate);
 		panel2.add(goBack);
 		panel3.add(rent);
 		

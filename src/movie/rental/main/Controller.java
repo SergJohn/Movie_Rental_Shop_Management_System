@@ -274,6 +274,31 @@ public class Controller implements ActionListener {
 			customerOptions.setVisible(true);
 		}
 		
+		/*
+		 * Renting functionalities
+		 * 
+		 * */
+		
+		// Renting
+		else if(e.getActionCommand().equals("make_rent")) {
+			
+			String customer_email = rentDash.customer.getText(); 
+			String title1 = rentDash.title1.getText();
+			String title2 = rentDash.title2.getText();
+			String title3 = rentDash.title3.getText();
+			String title4 = rentDash.title4.getText();
+			String rentDate = rentDash.rentDate.getText();
+			
+			if(customer_email == null || rentDate == null) {
+				if(title1 != null || title2 != null || title3 != null || title4 != null) {
+					System.out.println("You need to insert your email, day of rent and at least one title to be rented");
+				}
+			}else {
+				model.rent(customer_email, title1, title2, title3, title4, rentDate);
+			}
+			
+		}
+		
 		
 	}
 
