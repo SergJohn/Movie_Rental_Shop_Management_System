@@ -29,7 +29,7 @@ public class RentDash extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.setSize(350,500);
-        this.setTitle("Customer options");
+        this.setTitle("Rent");
 		
 	}
 	
@@ -74,7 +74,7 @@ public class RentDash extends JFrame{
 		goBack.addActionListener((ActionListener) controller);
 		goBack.setActionCommand("go_back_rent");
 		
-		JButton rent = new JButton("Proceed rent");
+		JButton rent = new JButton("Rent");
 		rent.addActionListener((ActionListener) controller);
 		rent.setActionCommand("proceed_rent");
 		

@@ -6,12 +6,14 @@ public class Customer {
 	private int phone;
 	private String email;
 	private String address;
+	SubscriptionType subsc;
 	
-	public Customer(String name, int phone, String email, String address) {
+	public Customer(String name, int phone, String email, String address, SubscriptionType subsc) {
 		this.name = name;
 		this.phone = phone;
 		this.email = email;
 		this.address = address;
+		this.subsc = subsc;
 	}
 	
 	public void setName(String name) {

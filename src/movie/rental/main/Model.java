@@ -386,13 +386,13 @@ public class Model {
 		try {
 			
 			String query = "SELECT * FROM titles;";
-			String query_two = "SELECT * FROM titles WHERE title_name = '"+ title +"' OR "
-					+ " title_director = '"+ title +"' OR "
-					+ " title_genre = '"+ title +"' OR "
-					+ " title_duration = '"+ title +"' OR "
-					+ " title_media = '"+ title +"' OR "
-					+ " title_year = '"+ title +"' OR "
-					+ " memberships_membership_id = '"+ title +"';"; 
+			String query_two = "SELECT * FROM titles WHERE title_name LIKE '%"+ title +"%' OR "
+					+ " title_director LIKE '%"+ title +"%' OR "
+					+ " title_genre LIKE '%"+ title +"%' OR "
+					+ " title_duration LIKE '%"+ title +"%' OR "
+					+ " title_media LIKE '%"+ title +"%' OR "
+					+ " title_year LIKE '%"+ title +"%' OR "
+					+ " memberships_membership_id LIKE '%"+ title +"%';"; 
 			
 			// Using the first query to find out how many lines of content we have in DB
 			ResultSet rs = stmt.executeQuery(query);
@@ -543,6 +543,11 @@ public class Model {
     }
 	}
 
+	/**
+	 * @method findCustomer
+	 * @param String customer from JTextField on customer Options/Dash Board
+	 * @return Array string with data from DB
+	 * */
 	public String[][] findCustomer(String customer) {
 		
 		String[][] data = null;
