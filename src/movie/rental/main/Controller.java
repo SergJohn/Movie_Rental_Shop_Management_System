@@ -3,6 +3,7 @@ package movie.rental.main;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import movie.rental.customers.AddNewCustomer;
 import movie.rental.titles.AddNewTitle;
 import movie.rental.titles.LiveConcertList;
 import movie.rental.titles.MovieList;
@@ -26,6 +27,7 @@ public class Controller implements ActionListener {
 	LiveConcertList liveConcertList;
 	AddNewTitle addNewTitleView;
 	TitleFound titleFound;
+	AddNewCustomer addNewCustomerView;
 	
 	public Controller() {
 		
@@ -208,6 +210,35 @@ public class Controller implements ActionListener {
 		else if(e.getActionCommand().equals("go_back_archive_from_found_title")) {
 			titleFound.dispose();
 			itemsOptions.setVisible(true);
+		}
+		
+		/*
+		 * Customer functionalities
+		 * 
+		 * */
+		
+		// Opening the Add new customer view
+		else if(e.getActionCommand().equals("add_new_customer_view")) {
+			System.out.println("Going to add new customer view");
+			addNewCustomerView = new AddNewCustomer(this);
+			customerOptions.setVisible(false);
+		}
+		// go back customer options
+		else if(e.getActionCommand().equals("go_back_cust_options_from_add_new_customer")) {
+			addNewCustomerView.dispose();
+			customerOptions.setVisible(true);
+		}
+		// Sending customer's information to model to proceed with db registration
+		else if(e.getActionCommand().equals("add_new_customer")) {
+			
+			// Getting data from JTextFields
+			String name = addNewCustomerView.name.getText();
+			String phone = addNewCustomerView.phone.getText();
+			String email = addNewCustomerView.email.getText();
+			String address = addNewCustomerView.address.getText();
+			int subscription = Integer.parseInt(addNewCustomerView.subscription.getText());
+			// Calling model and passing arguments
+			model.addNewCustomer(name, phone, email, address, subscription);
 		}
 		
 		

@@ -73,15 +73,11 @@ public class CustomerDash extends JFrame{
 		// Buttons with its ActionListeners
 		JButton addCustomer = new JButton("Add new");
 		addCustomer.addActionListener((ActionListener) controller);
-		addCustomer.setActionCommand("add_new_customer");
+		addCustomer.setActionCommand("add_new_customer_view");
 		
-		JButton updateCustomer = new JButton("Update info");
+		JButton updateCustomer = new JButton("Update Subscription");
 		updateCustomer.addActionListener((ActionListener) controller);
-		updateCustomer.setActionCommand("update_info");
-		
-		JButton rentBtn = new JButton("Renting");
-		rentBtn.addActionListener((ActionListener) controller);
-		rentBtn.setActionCommand("rent_menu");
+		updateCustomer.setActionCommand("update_subscription_view");
 		
 		JTextField findCustomerTxt = new JTextField(15);
 		JButton findCustomer = new JButton("Find customer");
@@ -97,12 +93,9 @@ public class CustomerDash extends JFrame{
 		panel1.add(Box.createRigidArea(new Dimension(50,50)));
 		panel1.add(addCustomer);
 		panel1.add(updateCustomer);
-		panel1.add(rentBtn);
 		panel2.add(goBack);
 		panel3.add(findCustomerTxt);
 		panel3.add(findCustomer);
-		
-		
 	}
 	
 	private void validation() {

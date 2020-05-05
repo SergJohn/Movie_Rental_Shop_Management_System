@@ -1,10 +1,12 @@
 package movie.rental.main;
 
+import java.awt.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -62,7 +64,7 @@ public class Model {
 	        this.setVisible(false);
 	        this.setSize(300,300);
 	        
-	        JOptionPane.showMessageDialog(this, "Title added!");
+	        JOptionPane.showMessageDialog(this, "Operation made successfully!");
 	        
 	        this.validate();
 	        this.repaint();
@@ -372,6 +374,11 @@ public class Model {
 		
 	}
 
+	/**
+	 * @method findTitle
+	 * @param String title from JTextField on items/archives Dash Board
+	 * @return Array string with data from DB
+	 * */
 	public String[][] findTitle(String title) {
 		
 		String[][] data = null;
@@ -439,6 +446,57 @@ public class Model {
 		}
 		
 		return data;
+	}
+
+	/**
+	 * @method addNewCustomer
+	 * @param String name
+	 * @param String phone
+	 * @param String email
+	 * @param String address
+	 * @param int subscription
+	 * 
+	 * */
+	public void addNewCustomer(String name, String phone, String email, String address, int subscription) {
+		
+		try {
+			String query = "INSERT INTO customers (cust_name, cust_phone_no, cust_email, cust_address)"
+					+ " VALUES ('"+ name +"', '"+ phone +"', '"+ email +"', '"+ address +"');" ;
+			
+			String query2 = "SELECT cust_id FROM customers;";
+			
+			ResultSet rs = stmt.executeQuery(query2);
+			ArrayList<String> result = new ArrayList<>();
+			int row = 0;
+			while(rs.next()) {
+				System.out.println(rs.getString("cust_id"));
+				result.add(rs.getString("cust_id"));
+				row++;
+			}
+			System.out.println(result.size() + 1);
+			int id = result.size() + 1;
+			
+			String query3 = "INSERT INTO subscriptions (memberships_membership_id, customers_cust_id) VALUES ('"+ subscription +"', '"+ id +"');";
+			
+			stmt.execute(query);
+			
+			stmt.execute(query3);
+			new addMessage();
+			
+		}catch( SQLException se) {
+			System.out.println("SQL Exception:");
+			
+			// Loop through the SQL Exceptions
+            while( se != null ){
+                System.out.println( "State  : " + se.getSQLState()  ) ;
+                System.out.println( "Message: " + se.getMessage()   ) ;
+                System.out.println( "Error  : " + se.getErrorCode() ) ;
+
+                se = se.getNextException() ;
+            }
+		}catch( Exception e ){
+            System.out.println( e ) ;
+    }
 	}
 
 }
