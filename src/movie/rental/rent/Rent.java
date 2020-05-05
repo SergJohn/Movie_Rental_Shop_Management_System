@@ -9,6 +9,7 @@ public class Rent {
 	private String returnDate;
 	private Customer customerName;
 	private Title titleName;
+	private int customerPoints;
 	
 	public Rent(String rentDate, String returnDate, Customer customerName, Title titleName) {
 		this.rentDate = rentDate;
@@ -22,6 +23,7 @@ public class Rent {
 		this.titleName = titleName;
 		this.rentDate = rentDate;
 		returnDate = rentDate + 3;
+		customerPoints = customerPoints + 1;
 		
 	}
 

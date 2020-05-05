@@ -7,6 +7,7 @@ public class Customer {
 	private String email;
 	private String address;
 	SubscriptionType subsc;
+	public int points;
 	
 	public Customer(String name, int phone, String email, String address, SubscriptionType subsc) {
 		this.name = name;
@@ -14,6 +15,7 @@ public class Customer {
 		this.email = email;
 		this.address = address;
 		this.subsc = subsc;
+		setPoints(0);
 	}
 	
 	public void setName(String name) {
@@ -46,5 +48,13 @@ public class Customer {
 	
 	public String getAddress() {
 		return this.address;
+	}
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
 	}
 }
