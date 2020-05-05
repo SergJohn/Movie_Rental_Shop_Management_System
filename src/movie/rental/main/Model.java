@@ -499,4 +499,48 @@ public class Model {
     }
 	}
 
+	/**
+	 * @method update subscription plan
+	 * @param String email
+	 * @param String subscription
+	 * */
+	public void updateSubscription(String email, String subscription) {
+		
+		try {
+			
+			String query = "SELECT cust_id FROM customers WHERE cust_email = '"+ email +"';";
+			
+			ResultSet rs = stmt.executeQuery(query);
+			ArrayList<String> result = new ArrayList<>();
+			int row = 0;
+			while(rs.next()) {
+				System.out.println(rs.getString("cust_id"));
+				result.add(rs.getString("cust_id"));
+				row++;
+			}
+			System.out.println(result.get(0));
+			int id = Integer.parseInt(result.get(0));
+			
+			String query3 = "UPDATE subscriptions SET memberships_membership_id = '"+ Integer.parseInt(subscription) +"' WHERE "
+					+ " customers_cust_id = '"+ id +"';";
+			
+			stmt.execute(query3);
+			new addMessage();
+			
+		}catch( SQLException se) {
+			System.out.println("SQL Exception:");
+			
+			// Loop through the SQL Exceptions
+            while( se != null ){
+                System.out.println( "State  : " + se.getSQLState()  ) ;
+                System.out.println( "Message: " + se.getMessage()   ) ;
+                System.out.println( "Error  : " + se.getErrorCode() ) ;
+
+                se = se.getNextException() ;
+            }
+		}catch( Exception e ){
+            System.out.println( e ) ;
+    }
+	}
+
 }

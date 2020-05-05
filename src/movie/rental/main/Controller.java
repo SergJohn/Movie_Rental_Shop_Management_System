@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import movie.rental.customers.AddNewCustomer;
+import movie.rental.customers.UpdateCustomerSubscription;
 import movie.rental.titles.AddNewTitle;
 import movie.rental.titles.LiveConcertList;
 import movie.rental.titles.MovieList;
@@ -28,6 +29,7 @@ public class Controller implements ActionListener {
 	AddNewTitle addNewTitleView;
 	TitleFound titleFound;
 	AddNewCustomer addNewCustomerView;
+	UpdateCustomerSubscription updateSubscription;
 	
 	public Controller() {
 		
@@ -240,7 +242,23 @@ public class Controller implements ActionListener {
 			// Calling model and passing arguments
 			model.addNewCustomer(name, phone, email, address, subscription);
 		}
-		
+		// Updating customer's subscription plan
+		else if(e.getActionCommand().equals("update_subscription_view")) {
+			updateSubscription = new UpdateCustomerSubscription(this);
+			customerOptions.setVisible(false);
+		}
+		// Go back from update customer view to customer options
+		else if(e.getActionCommand().equals("go_back_cust_options_from_update_subscription")) {
+			updateSubscription.dispose();
+			customerOptions.setVisible(true);
+		}
+		// Sending subscription's information to change in DB
+		else if(e.getActionCommand().equals("update_subscription_logic")) {
+			
+			String email = updateSubscription.email.getText();
+			String subscription = updateSubscription.subscription.getText();
+			model.updateSubscription(email, subscription);
+		}
 		
 		
 	}
