@@ -16,7 +16,7 @@ import movie.rental.main.Controller;
 
 public class ReturnTitle extends JFrame {
 	
-	JTextField email;
+	public JTextField email;
 	private Controller controller;
 	
 	public ReturnTitle(Controller controller) {

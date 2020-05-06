@@ -312,6 +312,12 @@ public class Controller implements ActionListener {
 			view.setVisible(true);
 		}
 		
+		else if(e.getActionCommand().equals("do_return")) {
+			
+			String email = returnTitle.email.getText();
+			model.returnTitle(email);
+		}
+		
 		
 	}
 

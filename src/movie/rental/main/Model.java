@@ -621,7 +621,7 @@ public class Model {
             }
 		}catch( Exception e ){
             System.out.println( e ) ;
-    }
+		}
 	}
 
 	/**
@@ -925,6 +925,130 @@ public class Model {
 			return false;
 		}
 		
+	}
+
+	/**
+	 * This method will get the email of the customer
+	 * Query the DB to find out the titles with this customer
+	 * Proceed the return of the titles
+	 * 
+	 * @method returnTitle
+	 * @param String email
+	 * 
+	 * */
+	public void returnTitle(String email) {
+		
+		if(email == null) {
+			new addMessage(2);
+		}else {
+			
+			try {
+				
+				// Step 1 -> find out customer ID using customer's email
+				String find_id = "SELECT cust_id FROM customers WHERE cust_email = '"+ email +"';";
+				
+				ResultSet rs = stmt.executeQuery(find_id);
+				ArrayList<String> result = new ArrayList<>();
+				int row = 0;
+				while(rs.next()) {
+					System.out.println(rs.getString("cust_id"));
+					result.add(rs.getString("cust_id"));
+					row++;
+				}
+				System.out.println(result.get(0));
+				int id = Integer.parseInt(result.get(0));
+				
+				// Step 2 -> find out title's ID
+				String titles_id = "SELECT titles_title_id FROM rents WHERE customers_cust_id = '"+ id +"'";
+				
+				ResultSet rs_titles_id = stmt.executeQuery(titles_id);
+				ArrayList<String> result_titles_id = new ArrayList<>();
+				int row2 = 0;
+				while(rs_titles_id.next()) {
+					System.out.println(rs_titles_id.getString("titles_title_id"));
+					result_titles_id.add(rs_titles_id.getString("titles_title_id"));
+					row2++;
+				}
+				System.out.println(result_titles_id);
+				
+				// Step 3 -> turn titles returned back to available
+				if(result_titles_id.size() == 1) {
+					int id_titles = Integer.parseInt(result_titles_id.get(0));
+					String set_available = "UPDATE titles SET available = 'true' WHERE title_id = '"+ id_titles +"'";
+					stmt.execute(set_available);
+				}
+				
+				if(result_titles_id.size() == 2) {
+					int id_titles = Integer.parseInt(result_titles_id.get(0));
+					String set_available = "UPDATE titles SET available = 'true' WHERE title_id = '"+ id_titles +"'";
+					stmt.execute(set_available);
+					
+					int id_titles1 = Integer.parseInt(result_titles_id.get(1));
+					String set_available1 = "UPDATE titles SET available = 'true' WHERE title_id = '"+ id_titles1 +"'";
+					stmt.execute(set_available1);
+				}
+				
+				if(result_titles_id.size() == 3) {
+					int id_titles = Integer.parseInt(result_titles_id.get(0));
+					String set_available = "UPDATE titles SET available = 'true' WHERE title_id = '"+ id_titles +"'";
+					stmt.execute(set_available);
+					
+					int id_titles1 = Integer.parseInt(result_titles_id.get(1));
+					String set_available1 = "UPDATE titles SET available = 'true' WHERE title_id = '"+ id_titles1 +"'";
+					stmt.execute(set_available1);
+					
+					int id_titles2 = Integer.parseInt(result_titles_id.get(2));
+					String set_available2 = "UPDATE titles SET available = 'true' WHERE title_id = '"+ id_titles2 +"'";
+					stmt.execute(set_available2);
+				}
+				
+				if(result_titles_id.size() == 4) {
+					int id_titles = Integer.parseInt(result_titles_id.get(0));
+					String set_available = "UPDATE titles SET available = 'true' WHERE title_id = '"+ id_titles +"'";
+					stmt.execute(set_available);
+					
+					int id_titles1 = Integer.parseInt(result_titles_id.get(1));
+					String set_available1 = "UPDATE titles SET available = 'true' WHERE title_id = '"+ id_titles1 +"'";
+					stmt.execute(set_available1);
+					
+					int id_titles2 = Integer.parseInt(result_titles_id.get(2));
+					String set_available2 = "UPDATE titles SET available = 'true' WHERE title_id = '"+ id_titles2 +"'";
+					stmt.execute(set_available2);
+					
+					int id_titles3 = Integer.parseInt(result_titles_id.get(3));
+					String set_available3 = "UPDATE titles SET available = 'true' WHERE title_id = '"+ id_titles3 +"'";
+					stmt.execute(set_available3);
+				}
+				
+				// Step 4 -> delete the rents made by customer
+				String del_rent = "DELETE FROM rents WHERE customers_cust_id = '"+ id +"'";
+				
+				stmt.execute(del_rent);
+				
+				// Step 5 -> reset the number on column: cust_rents which can be max 4 (rents per time) 
+				int zero = 0;
+				String reset_num_rents = "UPDATE customers SET cust_rents = '"+ zero +"' WHERE cust_id = '"+ id +"'";
+				
+				stmt.execute(reset_num_rents);
+				
+				new addMessage(1);
+				
+				
+			}catch( SQLException se) {
+				System.out.println("SQL Exception:");
+				
+				// Loop through the SQL Exceptions
+	            while( se != null ){
+	                System.out.println( "State  : " + se.getSQLState()  ) ;
+	                System.out.println( "Message: " + se.getMessage()   ) ;
+	                System.out.println( "Error  : " + se.getErrorCode() ) ;
+
+	                se = se.getNextException() ;
+	            }
+			}catch( Exception e ){
+	            System.out.println( e ) ;
+			}
+		}
 	}
 
 }
