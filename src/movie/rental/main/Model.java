@@ -636,7 +636,12 @@ public class Model {
 		try {
 			
 			String query = "SELECT * FROM customers;";
-			String query_two = "SELECT * FROM customers WHERE cust_id LIKE '%"+customer+"%' OR "
+			String query_two = "SELECT memberships_membership_id, cust_id, cust_name, "
+					+ " cust_phone_no, cust_email, cust_address, cust_points, cust_rents "
+					+ " FROM subscriptions " 
+					+ " INNER JOIN customers " 
+					+ " ON subscriptions.customers_cust_id = customers.cust_id "
+					+ " WHERE cust_id LIKE '%"+customer+"%' OR "
 					+ " cust_name LIKE '%"+customer+"%' OR "
 					+ " cust_phone_no LIKE '%"+customer+"%' OR "
 					+ " cust_email LIKE '%"+customer+"%' OR "
@@ -653,11 +658,12 @@ public class Model {
 			// Using the second query to collect the data and insert into the variable to be returned
 			ResultSet rs2 = stmt.executeQuery(query_two);
 			
-			data = new String[line][7];
+			data = new String[line][8];
 			int row = 0;
 			
 			while(rs2.next()) {
-				System.out.println(rs2.getString("cust_id") + "\t" + 
+				System.out.println(rs2.getString("memberships_membership_id") + "\t" +
+									rs2.getString("cust_id") + "\t" + 
 									rs2.getString("cust_name") + "\t" +
 									rs2.getString("cust_phone_no") + "\t" +
 									rs2.getString("cust_email") + "\t" + 
@@ -666,13 +672,14 @@ public class Model {
 									rs2.getString("cust_rents"));
 				
 				// Adding data from DB into Data[][]
-				data[row][0] = rs2.getString("cust_id");
-				data[row][1] = rs2.getString("cust_name");
-				data[row][2] = rs2.getString("cust_phone_no");
-				data[row][3] = rs2.getString("cust_email");
-				data[row][4] = rs2.getString("cust_address");
-				data[row][5] = rs2.getString("cust_points");
-				data[row][6] = rs2.getString("cust_rents");
+				data[row][0] = rs2.getString("memberships_membership_id");
+				data[row][1] = rs2.getString("cust_id");
+				data[row][2] = rs2.getString("cust_name");
+				data[row][3] = rs2.getString("cust_phone_no");
+				data[row][4] = rs2.getString("cust_email");
+				data[row][5] = rs2.getString("cust_address");
+				data[row][6] = rs2.getString("cust_points");
+				data[row][7] = rs2.getString("cust_rents");
 				row++;
 			}
 			
@@ -850,9 +857,9 @@ public class Model {
 				stmt.execute(set_rent);
 				limitRent = true;
 			}else {
-				int zero = 0;
-				String set_rents_zero = "UPDATE customers SET cust_rents = '"+ zero +"' WHERE cust_id = '"+ cust_id +"'";
-				stmt.execute(set_rents_zero);
+//				int zero = 0;
+//				String set_rents_zero = "UPDATE customers SET cust_rents = '"+ zero +"' WHERE cust_id = '"+ cust_id +"'";
+//				stmt.execute(set_rents_zero);
 				limitRent = false;
 			}
 			
