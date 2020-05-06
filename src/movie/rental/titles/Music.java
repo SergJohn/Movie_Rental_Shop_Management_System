@@ -10,7 +10,7 @@ public class Music extends Title {
 	}
 	
 	public Music(String name, String genre, int year, int duration, String band) {
-		super(name, genre, year, duration);
+		super(duration, name, genre, band, year, band, duration, duration);
 		this.band = band;
 	}
 	

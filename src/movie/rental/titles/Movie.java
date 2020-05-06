@@ -10,7 +10,7 @@ public class Movie extends Title {
 	}
 	
 	public Movie(String name, String genre, int year, int duration, String director) {
-		super(name, genre, year, duration);
+		super(duration, name, genre, director, year, director, duration, duration);
 		this.director = director;
 	}
 	

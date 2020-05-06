@@ -750,50 +750,55 @@ public class Model {
 			}
 			else {
 				// Step 5
-				// Check customer points and in step 6 give a free rent in case points > 99
-				String check_points = "SELECT cust_points FROM customers WHERE cust_id = '"+ cust_id +"';";
-				ResultSet rs_points = stmt.executeQuery(check_points);
-				ArrayList<String> result_points = new ArrayList<>();
-				while(rs_points.next()) {
-					result_points.add(rs_points.getString("cust_points"));
-				}
-				points = Integer.parseInt(result_points.get(0));
-				
-				// Step 6
-				// Query to add the proceed with the RENT and include it to DB
-				String query1 = "INSERT INTO rents (rent_return, rent_date, customers_cust_id, titles_title_id)"
-						+ " VALUES ('"+ rent_return +"', '"+ rentDate +"', '"+ cust_id +"', '"+ title1 +"');" ;
-				
-				String query2 = "UPDATE titles SET available = 'false' WHERE title_id = '"+ title1 +"'";
-				
-				
-						
-						
-				if(subscription.equals("4") || subscription.equals(type)) {
-					
-					if(points > 99) {
-						new addMessage(3);
-						points = 0;
-						String query3 = "UPDATE customers SET cust_points = '"+ points +"' WHERE cust_id = '"+ cust_id +"'";
-						stmt.execute(query1);
-						stmt.execute(query2);
-						stmt.execute(query3);
-						
-					}else {
-						points = points + 10;
-						String query3 = "UPDATE customers SET cust_points = '"+ points +"' WHERE cust_id = '"+ cust_id +"'";
-						stmt.execute(query1);
-						stmt.execute(query2);
-						stmt.execute(query3);
-					}
-							
-					new addMessage(1);
-			
+				// Check total of customer rents per time
+				if(!checkCustomerRents(cust_id)) {
+					new addMessage(4);
 				}else {
-					new addMessage(2);
+					// Step 6
+					// Check customer points and in step 7 give a free rent in case points > 99
+					String check_points = "SELECT cust_points FROM customers WHERE cust_id = '"+ cust_id +"';";
+					ResultSet rs_points = stmt.executeQuery(check_points);
+					ArrayList<String> result_points = new ArrayList<>();
+					while(rs_points.next()) {
+						result_points.add(rs_points.getString("cust_points"));
+					}
+					points = Integer.parseInt(result_points.get(0));
+					
+					// Step 7
+					// Query to add the proceed with the RENT and include it to DB
+					String query1 = "INSERT INTO rents (rent_return, rent_date, customers_cust_id, titles_title_id)"
+							+ " VALUES ('"+ rent_return +"', '"+ rentDate +"', '"+ cust_id +"', '"+ title1 +"');" ;
+					
+					String query2 = "UPDATE titles SET available = 'false' WHERE title_id = '"+ title1 +"'";
+					
+							
+					if(subscription.equals("4") || subscription.equals(type)) {
+						
+						if(points > 99) {
+							new addMessage(3);
+							points = 0;
+							String query3 = "UPDATE customers SET cust_points = '"+ points +"' WHERE cust_id = '"+ cust_id +"'";
+							stmt.execute(query1);
+							stmt.execute(query2);
+							stmt.execute(query3);
+							
+						}else {
+							points = points + 10;
+							String query3 = "UPDATE customers SET cust_points = '"+ points +"' WHERE cust_id = '"+ cust_id +"'";
+							stmt.execute(query1);
+							stmt.execute(query2);
+							stmt.execute(query3);
+						}
+								
+						new addMessage(1);
+				
+					}else {
+						new addMessage(2);
+					}
 				}
+
 			}
-			
+				
 		}catch( SQLException se) {
 			System.out.println("SQL Exception:");
 			
@@ -809,6 +814,47 @@ public class Model {
 		}catch( Exception e ){
             System.out.println( e ) ;
             new addMessage(2);
+		}
+		
+	}
+
+	private boolean checkCustomerRents(String cust_id) {
+		
+		boolean limitRent = true;
+		
+		try {
+			String check_limit = "SELECT cust_rents FROM customers WHERE cust_id = '"+ cust_id +"'";
+			ResultSet rs_limit = stmt.executeQuery(check_limit);
+			ArrayList<String> result_limit = new ArrayList<>();
+			while(rs_limit.next()) {
+				result_limit.add(rs_limit.getString("available"));
+			}
+			
+			if(result_limit.get(0).equals("true")) {
+				limitRent = true;
+			}else {
+				limitRent = false;
+			}
+			
+		}catch( SQLException se) {
+			System.out.println("SQL Exception:");
+			
+			// Loop through the SQL Exceptions
+            while( se != null ){
+                System.out.println( "State  : " + se.getSQLState()  ) ;
+                System.out.println( "Message: " + se.getMessage()   ) ;
+                System.out.println( "Error  : " + se.getErrorCode() ) ;
+
+                se = se.getNextException() ;
+            }
+		}catch( Exception e ){
+            System.out.println( e ) ;
+		}
+		
+		if(limitRent) {
+			return true;
+		}else {
+			return false;
 		}
 		
 	}

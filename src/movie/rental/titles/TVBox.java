@@ -7,7 +7,7 @@ public class TVBox extends Title {
 	}
 	
 	public TVBox(String name, String genre, int year, int duration) {
-		super(name, genre, year, duration);
+		super(duration, name, genre, genre, year, genre, duration, duration);
 	}
 
 }
