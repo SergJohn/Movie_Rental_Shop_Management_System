@@ -18,9 +18,6 @@ public class RentDash extends JFrame{
 	public JTextField rentDate;
 	public JTextField customer;
 	public JTextField title1;
-	public JTextField title2;
-	public JTextField title3;
-	public JTextField title4;
 	private Controller controller;
 	
 	public RentDash(Controller controller) {
@@ -70,9 +67,7 @@ public class RentDash extends JFrame{
 		JLabel welcomeLabel = new JLabel("RENT");
 		JLabel customer_label = new JLabel("Customer email");
 		JLabel title1_label = new JLabel("First Title id");
-		JLabel title2_label = new JLabel("Second Title id");
-		JLabel title3_label = new JLabel("Third Title id");
-		JLabel title4_label = new JLabel("Fourth Title id");
+
 		JLabel rentDate_label = new JLabel("Date of rent - YYYY-MM-DD");
 		
 		// Buttons
@@ -87,9 +82,6 @@ public class RentDash extends JFrame{
 		// Declaring the TextField's
 		customer = new JTextField(20);
 		title1 = new JTextField(20);
-		title2 = new JTextField(20);
-		title3 = new JTextField(20);
-		title4 = new JTextField(20);
 		rentDate = new JTextField(20);
 		
 		// Adding everything to its panels
@@ -99,12 +91,6 @@ public class RentDash extends JFrame{
 		panel1.add(customer);
 		panel1.add(title1_label);
 		panel1.add(title1);
-		panel1.add(title2_label);
-		panel1.add(title2);
-		panel1.add(title3_label);
-		panel1.add(title3);
-		panel1.add(title4_label);
-		panel1.add(title4);
 		panel1.add(rentDate_label);
 		panel1.add(rentDate);
 		panel2.add(goBack);
