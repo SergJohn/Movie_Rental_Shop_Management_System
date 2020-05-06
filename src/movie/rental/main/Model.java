@@ -827,12 +827,18 @@ public class Model {
 			ResultSet rs_limit = stmt.executeQuery(check_limit);
 			ArrayList<String> result_limit = new ArrayList<>();
 			while(rs_limit.next()) {
-				result_limit.add(rs_limit.getString("available"));
+				result_limit.add(rs_limit.getString("cust_rents"));
 			}
 			
-			if(result_limit.get(0).equals("true")) {
+			if(result_limit.get(0).equals("0") || result_limit.get(0).equals("1") || result_limit.get(0).equals("2") || result_limit.get(0).equals("3")) {
+				int rent = Integer.parseInt(result_limit.get(0)) + 1;
+				String set_rent = "UPDATE customers SET cust_rents = '"+ rent +"' WHERE cust_id = '"+ cust_id +"'";
+				stmt.execute(set_rent);
 				limitRent = true;
 			}else {
+				int zero = 0;
+				String set_rents_zero = "UPDATE customers SET cust_rents = '"+ zero +"' WHERE cust_id = '"+ cust_id +"'";
+				stmt.execute(set_rents_zero);
 				limitRent = false;
 			}
 			
