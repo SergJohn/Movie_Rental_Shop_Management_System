@@ -10,6 +10,7 @@ import movie.rental.titles.AddNewTitle;
 import movie.rental.titles.LiveConcertList;
 import movie.rental.titles.MovieList;
 import movie.rental.titles.MusicList;
+import movie.rental.titles.ReturnTitle;
 import movie.rental.titles.TVBoxList;
 
 /**
@@ -32,6 +33,7 @@ public class Controller implements ActionListener {
 	AddNewCustomer addNewCustomerView;
 	UpdateCustomerSubscription updateSubscription;
 	CustomerFound customerFound;
+	ReturnTitle returnTitle;
 	
 	public Controller() {
 		
@@ -294,6 +296,20 @@ public class Controller implements ActionListener {
 				model.rent(customer_email, title1, rentDate);
 			}
 			
+		}
+		
+		/*
+		 * Returning a title
+		 * */
+		
+		else if(e.getActionCommand().equals("open_return_view")) {
+			view.setVisible(false);
+			returnTitle = new ReturnTitle(this);
+		}
+		
+		else if(e.getActionCommand().equals("go_back_dash_from_return_title")) {
+			returnTitle.dispose();
+			view.setVisible(true);
 		}
 		
 		

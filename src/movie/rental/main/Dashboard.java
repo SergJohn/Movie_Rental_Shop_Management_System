@@ -65,12 +65,17 @@ public class Dashboard extends JFrame {
 		rentBtn.addActionListener((ActionListener) controller);
 		rentBtn.setActionCommand("rent_menu");
 		
+		JButton returnBtn = new JButton("Return");
+		returnBtn.addActionListener((ActionListener) controller);
+		returnBtn.setActionCommand("open_return_view");
+		
 		
 		panel1.add(welcomeLabel);
 		panel1.add(Box.createRigidArea(new Dimension(50,50)));
 		panel1.add(cusBtn);
 		panel1.add(archivesBtn);
 		panel1.add(rentBtn);
+		panel1.add(returnBtn);
 		
 		
 	}
