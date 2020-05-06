@@ -2,10 +2,14 @@ package movie.rental.titles;
 
 public abstract class Title {
 	
+	protected int id;
 	protected String name;
-	protected int year;
+	protected String director;
 	protected String genre;
 	protected int duration;
+	protected String media;
+	protected int year;
+	protected int membership;	
 	protected boolean available;
 	
 	// Constructor
@@ -13,11 +17,17 @@ public abstract class Title {
 		this.name = name;
 	}
 	
-	public Title(String name, String genre, int year, int duration) {
+	public Title(int id, String name, String director, String genre, int duration, String media, int year, int membership) {
+		this.id = id;
 		this.name = name;
+		this.director = director;
 		this.genre = genre;
-		this.year = year;
 		this.duration = duration;
+		this.media = media;
+		this.year = year;
+		this.membership = membership;
+		available = false;
+		
 	}
 	
 	// getters and setters

@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import movie.rental.titles.Title;
+
 /**
 *
 * @author mrosa
@@ -51,7 +53,7 @@ public class Model {
 	        
 	    }
 	
-	// Using an Inner Class to add a completion message
+	// Using an Inner Class to add and display the possible messages
 	class addMessage extends JFrame implements movie.rental.interfaces.Message{
 		
 		int num = 0;
@@ -63,6 +65,15 @@ public class Model {
 			}
 			else if(num == 2) {
 				errorMessage();
+			}
+			else if(num == 3) {
+				freeRentAllowed();
+			}
+			else if(num == 4) {
+				limitRental();
+			}
+			else if(num == 5) {
+				titleAlreadyTaken();
 			}
 			
 		}
@@ -89,6 +100,45 @@ public class Model {
 	        
 	        this.validate();
 	        this.repaint();
+		}
+		@Override
+		public void freeRentAllowed() {
+			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	        //Setting visible to false in order to show only the JPtioinPane, not the Frame
+	        this.setVisible(false);
+	        this.setSize(300,300);
+	        
+	        JOptionPane.showMessageDialog(this, "Congratulations, 100 points! We are giving you a free rent");
+	        
+	        this.validate();
+	        this.repaint();
+			
+		}
+		@Override
+		public void limitRental() {
+			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	        //Setting visible to false in order to show only the JPtioinPane, not the Frame
+	        this.setVisible(false);
+	        this.setSize(300,300);
+	        
+	        JOptionPane.showMessageDialog(this, "You have already four titles! Take easy... Why do not open a book this time?");
+	        
+	        this.validate();
+	        this.repaint();
+			
+		}
+		@Override
+		public void titleAlreadyTaken() {
+			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	        //Setting visible to false in order to show only the JPtioinPane, not the Frame
+	        this.setVisible(false);
+	        this.setSize(300,300);
+	        
+	        JOptionPane.showMessageDialog(this, "Title already taken, pick another one");
+	        
+	        this.validate();
+	        this.repaint();
+			
 		}
 		
 	}
@@ -635,9 +685,9 @@ public class Model {
 		// Variable declaration
 		String rent_return = rentDate.substring(0, 8);
 		String cust_id;
-		String title_name;
 		String subscription;
 		String type;
+		int points;
 		
 		// Simple validation to calculate return date
 		int day = Integer.parseInt(rentDate.substring(8, 10));
@@ -650,8 +700,10 @@ public class Model {
 		
 		rent_return = rent_return.concat(Integer.toString(day));
 		
-		// finding out customer's id from customer email
+		
 		try {
+			// Step 1
+			// finding out customer's id from customer email
 			String query = "SELECT cust_id FROM customers WHERE cust_email = '"+ customer_email +"';";
 			
 			ResultSet rs = stmt.executeQuery(query);
@@ -667,6 +719,7 @@ public class Model {
 			System.out.println(cust_id);
 			System.out.println(rent_return);
 			
+			// Step 2
 			// Query the Subscription entity to check if this customer can rent that specific title
 			String query_sub = "SELECT memberships_membership_id FROM subscriptions WHERE customers_cust_id = '"+ cust_id +"';";
 			
@@ -678,12 +731,10 @@ public class Model {
 			subscription = result_sub.get(0);
 			System.out.println("subscription: " + subscription);
 			//System.out.println(result_sub);
-			
-			//Main query to register the rent
-			
+						
+			// Step 3
 			// Query the titles to find out the kind of membership the title is included
 			String query_type = "SELECT memberships_membership_id FROM titles WHERE title_id = '"+ title1 +"';";
-				
 				
 			ResultSet rs_type = stmt.executeQuery(query_type);
 			ArrayList<String> result_type = new ArrayList<>();
@@ -691,18 +742,56 @@ public class Model {
 				result_type.add(rs_type.getString("memberships_membership_id"));
 			}
 			type = result_type.get(0);
-					
-			String query1 = "INSERT INTO rents (rent_return, rent_date, customers_cust_id, titles_title_id)"
-					+ " VALUES ('"+ rent_return +"', '"+ rentDate +"', '"+ cust_id +"', '"+ title1 +"');" ;
-					
-					
-			if(subscription.equals("4") || subscription.equals(type)) {
+			
+			// Step 4
+			// Check if title is available
+			if(!checkTitleAvailability(title1)) {
+				new addMessage(5);
+			}
+			else {
+				// Step 5
+				// Check customer points and in step 6 give a free rent in case points > 99
+				String check_points = "SELECT cust_points FROM customers WHERE cust_id = '"+ cust_id +"';";
+				ResultSet rs_points = stmt.executeQuery(check_points);
+				ArrayList<String> result_points = new ArrayList<>();
+				while(rs_points.next()) {
+					result_points.add(rs_points.getString("cust_points"));
+				}
+				points = Integer.parseInt(result_points.get(0));
+				
+				// Step 6
+				// Query to add the proceed with the RENT and include it to DB
+				String query1 = "INSERT INTO rents (rent_return, rent_date, customers_cust_id, titles_title_id)"
+						+ " VALUES ('"+ rent_return +"', '"+ rentDate +"', '"+ cust_id +"', '"+ title1 +"');" ;
+				
+				String query2 = "UPDATE titles SET available = 'false' WHERE title_id = '"+ title1 +"'";
+				
+				
 						
-				stmt.execute(query1);
-				new addMessage(1);
 						
-			}else {
-				new addMessage(2);
+				if(subscription.equals("4") || subscription.equals(type)) {
+					
+					if(points > 99) {
+						new addMessage(3);
+						points = 0;
+						String query3 = "UPDATE customers SET cust_points = '"+ points +"' WHERE cust_id = '"+ cust_id +"'";
+						stmt.execute(query1);
+						stmt.execute(query2);
+						stmt.execute(query3);
+						
+					}else {
+						points = points + 10;
+						String query3 = "UPDATE customers SET cust_points = '"+ points +"' WHERE cust_id = '"+ cust_id +"'";
+						stmt.execute(query1);
+						stmt.execute(query2);
+						stmt.execute(query3);
+					}
+							
+					new addMessage(1);
+			
+				}else {
+					new addMessage(2);
+				}
 			}
 			
 		}catch( SQLException se) {
@@ -722,6 +811,46 @@ public class Model {
             new addMessage(2);
 		}
 		
+	}
+
+	private boolean checkTitleAvailability(String title1) {
+		
+		boolean available = true;
+		
+		try {
+			String check_available = "SELECT available FROM titles WHERE title_id = '"+ title1 +"'";
+			ResultSet rs_av = stmt.executeQuery(check_available);
+			ArrayList<String> result_av = new ArrayList<>();
+			while(rs_av.next()) {
+				result_av.add(rs_av.getString("available"));
+			}
+			
+			if(result_av.get(0).equals("true")) {
+				available = true;
+			}else {
+				available = false;
+			}
+			
+		}catch( SQLException se) {
+			System.out.println("SQL Exception:");
+			
+			// Loop through the SQL Exceptions
+            while( se != null ){
+                System.out.println( "State  : " + se.getSQLState()  ) ;
+                System.out.println( "Message: " + se.getMessage()   ) ;
+                System.out.println( "Error  : " + se.getErrorCode() ) ;
+
+                se = se.getNextException() ;
+            }
+		}catch( Exception e ){
+            System.out.println( e ) ;
+		}
+		
+		if(available) {
+			return true;
+		}else {
+			return false;
+		}
 		
 	}
 

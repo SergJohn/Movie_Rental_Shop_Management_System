@@ -1,5 +1,7 @@
 package movie.rental.customers;
 
+import movie.rental.main.Model;
+
 public class Customer {
 
 	private String name;
@@ -8,14 +10,14 @@ public class Customer {
 	private String address;
 	SubscriptionType subsc;
 	public int points;
-	
+		
 	public Customer(String name, int phone, String email, String address, SubscriptionType subsc) {
 		this.name = name;
 		this.phone = phone;
 		this.email = email;
 		this.address = address;
 		this.subsc = subsc;
-		setPoints(0);
+		points = 0;
 	}
 	
 	public void setName(String name) {
