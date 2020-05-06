@@ -91,7 +91,7 @@ public class MovieList extends JFrame{
 		
 		JButton rent = new JButton("Proceed rent");
 		rent.addActionListener((ActionListener) controller);
-		rent.setActionCommand("proceed_rent");
+		rent.setActionCommand("proceed_rent_from_movie_list");
 		
 		// Adding everything to its panels
 		panel1.add(welcomeLabel);

@@ -87,7 +87,7 @@ public class CustomerFound extends JFrame {
 		
 		JButton rent = new JButton("Proceed rent");
 		rent.addActionListener((ActionListener) controller);
-		rent.setActionCommand("proceed_rent");
+		rent.setActionCommand("proceed_rent_from_customer_found");
 		
 		// Adding everything to its panels
 		panel1.add(welcomeLabel);

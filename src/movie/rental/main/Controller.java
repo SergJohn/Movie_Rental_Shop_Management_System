@@ -321,6 +321,40 @@ public class Controller implements ActionListener {
 			model.returnTitle(email);
 		}
 		
+		/*
+		 * Making new shortcuts to rent's view
+		 * 
+		 * */
+		// Shortcut to rent from movie's list
+		else if(e.getActionCommand().equals("proceed_rent_from_movie_list")) {
+			movieList.setVisible(false);
+			rentDash = new RentDash(this);
+		}
+		// Shortcut to rent from movie's list
+		else if(e.getActionCommand().equals("proceed_rent_from_music_list")) {
+			musicList.setVisible(false);
+			rentDash = new RentDash(this);
+		}
+		// Shortcut to rent from TVBox's list
+		else if(e.getActionCommand().equals("proceed_rent_from_tv_box_list")) {
+			tvBoxList.setVisible(false);
+			rentDash = new RentDash(this);
+		}
+		// Shortcut to rent from LiveConcert's list
+		else if(e.getActionCommand().equals("proceed_rent_from_live_concert_list")) {
+			liveConcertList.setVisible(false);
+			rentDash = new RentDash(this);
+		}
+		// Shortcut to rent from title found list
+		else if(e.getActionCommand().equals("proceed_rent_from_title_found")) {
+			titleFound.setVisible(false);
+			rentDash = new RentDash(this);
+		}
+		// Shortcut to rent from customer found list
+		else if(e.getActionCommand().equals("proceed_rent_from_customer_found")) {
+			customerFound.setVisible(false);
+			rentDash = new RentDash(this);
+		}
 		
 	}
 
