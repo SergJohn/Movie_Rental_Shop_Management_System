@@ -65,7 +65,7 @@ public class TitleFound extends JFrame{
 		
 		String[][] data = null;
 		
-		String[] columnNames = {"id", "name", "director", "genre", "duration", "media", "year", "membership"};
+		String[] columnNames = {"id", "name", "director", "genre", "duration", "media", "year", "available", "membership"};
 		
 		data = controller.model.findTitle(title);
 		

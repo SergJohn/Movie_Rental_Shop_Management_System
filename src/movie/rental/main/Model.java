@@ -169,7 +169,7 @@ public class Model {
 			// Using the second query to collect the data and insert into the variable to be returned
 			ResultSet rs2 = stmt.executeQuery(query_two);
 			
-			data = new String[line][8];
+			data = new String[line][9];
 			int row = 0;
 			
 			while(rs2.next()) {
@@ -179,7 +179,8 @@ public class Model {
 									rs2.getString("title_genre") + "\t" + 
 									rs2.getString("title_duration") + "\t" +
 									rs2.getString("title_media") + "\t" +
-									rs2.getString("title_year") + "\t" + 
+									rs2.getString("title_year") + "\t" +
+									rs2.getString("available") + "\t" +
 									rs2.getString("memberships_membership_id"));
 				
 				// Adding data from DB into Data[][]
@@ -190,7 +191,8 @@ public class Model {
 				data[row][4] = rs2.getString("title_duration");
 				data[row][5] = rs2.getString("title_media");
 				data[row][6] = rs2.getString("title_year");
-				data[row][7] = rs2.getString("memberships_membership_id");
+				data[row][7] = rs2.getString("available");
+				data[row][8] = rs2.getString("memberships_membership_id");
 				row++;
 			}
 			
@@ -238,7 +240,7 @@ public class Model {
 			// Using the second query to collect the data and insert into the variable to be returned
 			ResultSet rs2 = stmt.executeQuery(query_two);
 			
-			data = new String[line][8];
+			data = new String[line][9];
 			int row = 0;
 			
 			while(rs2.next()) {
@@ -249,6 +251,7 @@ public class Model {
 									rs2.getString("title_duration") + "\t" +
 									rs2.getString("title_media") + "\t" +
 									rs2.getString("title_year") + "\t" + 
+									rs2.getString("available") + "\t" + 
 									rs2.getString("memberships_membership_id"));
 				
 				// Adding data from DB into Data[][]
@@ -259,7 +262,8 @@ public class Model {
 				data[row][4] = rs2.getString("title_duration");
 				data[row][5] = rs2.getString("title_media");
 				data[row][6] = rs2.getString("title_year");
-				data[row][7] = rs2.getString("memberships_membership_id");
+				data[row][7] = rs2.getString("available");
+				data[row][8] = rs2.getString("memberships_membership_id");
 				row++;
 			}
 			
@@ -301,7 +305,7 @@ public class Model {
 			// Using the second query to collect the data and insert into the variable to be returned
 			ResultSet rs2 = stmt.executeQuery(query_two);
 			
-			data = new String[line][8];
+			data = new String[line][9];
 			int row = 0;
 			
 			while(rs2.next()) {
@@ -311,7 +315,8 @@ public class Model {
 									rs2.getString("title_genre") + "\t" + 
 									rs2.getString("title_duration") + "\t" +
 									rs2.getString("title_media") + "\t" +
-									rs2.getString("title_year") + "\t" + 
+									rs2.getString("title_year") + "\t" +
+									rs2.getString("available") + "\t" +
 									rs2.getString("memberships_membership_id"));
 				
 				// Adding data from DB into Data[][]
@@ -322,7 +327,8 @@ public class Model {
 				data[row][4] = rs2.getString("title_duration");
 				data[row][5] = rs2.getString("title_media");
 				data[row][6] = rs2.getString("title_year");
-				data[row][7] = rs2.getString("memberships_membership_id");
+				data[row][7] = rs2.getString("available");
+				data[row][8] = rs2.getString("memberships_membership_id");
 				row++;
 			}
 			
@@ -364,7 +370,7 @@ public class Model {
 			// Using the second query to collect the data and insert into the variable to be returned
 			ResultSet rs2 = stmt.executeQuery(query_two);
 			
-			data = new String[line][8];
+			data = new String[line][9];
 			int row = 0;
 			
 			while(rs2.next()) {
@@ -374,7 +380,8 @@ public class Model {
 									rs2.getString("title_genre") + "\t" + 
 									rs2.getString("title_duration") + "\t" +
 									rs2.getString("title_media") + "\t" +
-									rs2.getString("title_year") + "\t" + 
+									rs2.getString("title_year") + "\t" +
+									rs2.getString("available") + "\t" +
 									rs2.getString("memberships_membership_id"));
 				
 				// Adding data from DB into Data[][]
@@ -385,7 +392,8 @@ public class Model {
 				data[row][4] = rs2.getString("title_duration");
 				data[row][5] = rs2.getString("title_media");
 				data[row][6] = rs2.getString("title_year");
-				data[row][7] = rs2.getString("memberships_membership_id");
+				data[row][7] = rs2.getString("available");
+				data[row][8] = rs2.getString("memberships_membership_id");
 				row++;
 			}
 			
@@ -476,7 +484,7 @@ public class Model {
 			// Using the second query to collect the data and insert into the variable to be returned
 			ResultSet rs2 = stmt.executeQuery(query_two);
 			
-			data = new String[line][8];
+			data = new String[line][9];
 			int row = 0;
 			
 			while(rs2.next()) {
@@ -487,6 +495,7 @@ public class Model {
 									rs2.getString("title_duration") + "\t" +
 									rs2.getString("title_media") + "\t" +
 									rs2.getString("title_year") + "\t" + 
+									rs2.getString("available") + "\t" + 
 									rs2.getString("memberships_membership_id"));
 				
 				// Adding data from DB into Data[][]
@@ -497,7 +506,8 @@ public class Model {
 				data[row][4] = rs2.getString("title_duration");
 				data[row][5] = rs2.getString("title_media");
 				data[row][6] = rs2.getString("title_year");
-				data[row][7] = rs2.getString("memberships_membership_id");
+				data[row][7] = rs2.getString("available");
+				data[row][8] = rs2.getString("memberships_membership_id");
 				row++;
 			}
 			
