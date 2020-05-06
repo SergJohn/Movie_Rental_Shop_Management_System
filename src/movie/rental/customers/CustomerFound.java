@@ -67,7 +67,7 @@ public class CustomerFound extends JFrame {
 		
 		String[][] data = null;
 		
-		String[] columnNames = {"id", "name", "phone_no", "email", "address"};
+		String[] columnNames = {"id", "name", "phone_no", "email", "address", "points", "rents"};
 		
 		data = controller.model.findCustomer(customer);
 		

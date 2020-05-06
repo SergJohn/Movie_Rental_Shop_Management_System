@@ -653,7 +653,7 @@ public class Model {
 			// Using the second query to collect the data and insert into the variable to be returned
 			ResultSet rs2 = stmt.executeQuery(query_two);
 			
-			data = new String[line][5];
+			data = new String[line][7];
 			int row = 0;
 			
 			while(rs2.next()) {
@@ -661,7 +661,9 @@ public class Model {
 									rs2.getString("cust_name") + "\t" +
 									rs2.getString("cust_phone_no") + "\t" +
 									rs2.getString("cust_email") + "\t" + 
-									rs2.getString("cust_address"));
+									rs2.getString("cust_address") + "\t" + 
+									rs2.getString("cust_points") + "\t" +
+									rs2.getString("cust_rents"));
 				
 				// Adding data from DB into Data[][]
 				data[row][0] = rs2.getString("cust_id");
@@ -669,6 +671,8 @@ public class Model {
 				data[row][2] = rs2.getString("cust_phone_no");
 				data[row][3] = rs2.getString("cust_email");
 				data[row][4] = rs2.getString("cust_address");
+				data[row][5] = rs2.getString("cust_points");
+				data[row][6] = rs2.getString("cust_rents");
 				row++;
 			}
 			
