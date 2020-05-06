@@ -301,20 +301,23 @@ public class Controller implements ActionListener {
 		/*
 		 * Returning a title
 		 * */
-		
+		// Opening return view class
 		else if(e.getActionCommand().equals("open_return_view")) {
 			view.setVisible(false);
 			returnTitle = new ReturnTitle(this);
 		}
-		
+		// Going back to main dashboard from return title's view class
 		else if(e.getActionCommand().equals("go_back_dash_from_return_title")) {
 			returnTitle.dispose();
 			view.setVisible(true);
 		}
-		
+		// Performing the return
 		else if(e.getActionCommand().equals("do_return")) {
 			
+			// Getting necessary data from form in View
 			String email = returnTitle.email.getText();
+			
+			// Calling the method in model which will perform the title's return
 			model.returnTitle(email);
 		}
 		

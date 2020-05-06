@@ -58,6 +58,7 @@ public class Model {
 		
 		int num = 0;
 		
+		// Creating options inside constructor to get the most suitable message
 		public addMessage(int num) {
 			this.num = num;
 			if(num == 1) {
@@ -77,6 +78,7 @@ public class Model {
 			}
 			
 		}
+		// Using Interface Message to get this methods
 		@Override
 		public void addMessage() {
 			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -146,7 +148,7 @@ public class Model {
 	/**
 	 * 
 	 * Method String[][] movieList()
-	 * return String[][] with data from DB
+	 * @return String[][] with data from DB
 	 * 
 	 * */
 	public String[][] movieList() {
@@ -217,7 +219,7 @@ public class Model {
 	/**
 	 * 
 	 * Method String[][] musicList()
-	 * return String[][] with data from DB
+	 * @return String[][] with data from DB
 	 * 
 	 * */
 	public String[][] musicList() {
@@ -285,6 +287,11 @@ public class Model {
 		return data;
 	}
 
+	/**
+	 * Method which returns a Array 2D with data to be displayed by a table
+	 * @method tvBoxList
+	 * @return String[][] data
+	 * */
 	public String[][] tvBoxList() {
 		
 		String[][] data = null;
@@ -350,6 +357,11 @@ public class Model {
 		return data;
 	}
 
+	/**
+	 * Method which returns a Array 2D with data to be displayed by a table
+	 * @method liveConcertList
+	 * @return String[][] data
+	 * */
 	public String[][] liveConcertList() {
 		
 		String[][] data = null;
@@ -701,6 +713,13 @@ public class Model {
 		return data;
 	}
 
+	/**
+	 * Method with a few steps inside to collect necessary data and proceed with rent
+	 * @method rent
+	 * @param String customer_email
+	 * @param title1
+	 * @param rentDate
+	 * */
 	public void rent(String customer_email, String title1, String rentDate) {
 		
 		// Variable declaration
@@ -767,12 +786,14 @@ public class Model {
 			// Step 4
 			// Check if title is available
 			if(!checkTitleAvailability(title1)) {
+				// Message in case the title was already taken
 				new addMessage(5);
 			}
 			else {
 				// Step 5
 				// Check total of customer rents per time
 				if(!checkCustomerRents(cust_id)) {
+					// Message in case customer has already taken their four rents limit per time
 					new addMessage(4);
 				}else {
 					// Step 6
@@ -796,7 +817,9 @@ public class Model {
 					if(subscription.equals("4") || subscription.equals(type)) {
 						
 						if(points > 99) {
+							// Message to inform that user got 100 points and delivery a free rent
 							new addMessage(3);
+							// reset points to zero
 							points = 0;
 							String query3 = "UPDATE customers SET cust_points = '"+ points +"' WHERE cust_id = '"+ cust_id +"'";
 							stmt.execute(query1);
@@ -804,16 +827,20 @@ public class Model {
 							stmt.execute(query3);
 							
 						}else {
+							// Add 10 points for each rent
 							points = points + 10;
 							String query3 = "UPDATE customers SET cust_points = '"+ points +"' WHERE cust_id = '"+ cust_id +"'";
 							stmt.execute(query1);
 							stmt.execute(query2);
 							stmt.execute(query3);
 						}
-								
+						
+						// Message when everything goes right		
 						new addMessage(1);
 				
 					}else {
+						
+						// Message when user made a mistake or something that the system does not allows
 						new addMessage(2);
 					}
 				}
@@ -839,6 +866,12 @@ public class Model {
 		
 	}
 
+	/**
+	 * This method checks the limit of 4 rents per time of a customer was reached or not
+	 * @method checkCustomerRents
+	 * @param String cust_id
+	 * @return boolean
+	 * */
 	private boolean checkCustomerRents(String cust_id) {
 		
 		boolean limitRent = true;
@@ -857,9 +890,6 @@ public class Model {
 				stmt.execute(set_rent);
 				limitRent = true;
 			}else {
-//				int zero = 0;
-//				String set_rents_zero = "UPDATE customers SET cust_rents = '"+ zero +"' WHERE cust_id = '"+ cust_id +"'";
-//				stmt.execute(set_rents_zero);
 				limitRent = false;
 			}
 			
@@ -885,7 +915,12 @@ public class Model {
 		}
 		
 	}
-
+	
+	/**
+	 * This method will check the availability of a specific title
+	 *@method checkTitleAvailability
+	 *@param String title1 
+	 * */
 	private boolean checkTitleAvailability(String title1) {
 		
 		boolean available = true;
@@ -972,12 +1007,13 @@ public class Model {
 				System.out.println(result_titles_id);
 				
 				// Step 3 -> turn titles returned back to available
+				// If the customer have got just one title
 				if(result_titles_id.size() == 1) {
 					int id_titles = Integer.parseInt(result_titles_id.get(0));
 					String set_available = "UPDATE titles SET available = 'true' WHERE title_id = '"+ id_titles +"'";
 					stmt.execute(set_available);
 				}
-				
+				// If the customer have got two titles
 				if(result_titles_id.size() == 2) {
 					int id_titles = Integer.parseInt(result_titles_id.get(0));
 					String set_available = "UPDATE titles SET available = 'true' WHERE title_id = '"+ id_titles +"'";
@@ -987,7 +1023,7 @@ public class Model {
 					String set_available1 = "UPDATE titles SET available = 'true' WHERE title_id = '"+ id_titles1 +"'";
 					stmt.execute(set_available1);
 				}
-				
+				// If the customer have got three titles
 				if(result_titles_id.size() == 3) {
 					int id_titles = Integer.parseInt(result_titles_id.get(0));
 					String set_available = "UPDATE titles SET available = 'true' WHERE title_id = '"+ id_titles +"'";
@@ -1001,7 +1037,7 @@ public class Model {
 					String set_available2 = "UPDATE titles SET available = 'true' WHERE title_id = '"+ id_titles2 +"'";
 					stmt.execute(set_available2);
 				}
-				
+				// If the customer have got four titles
 				if(result_titles_id.size() == 4) {
 					int id_titles = Integer.parseInt(result_titles_id.get(0));
 					String set_available = "UPDATE titles SET available = 'true' WHERE title_id = '"+ id_titles +"'";
@@ -1031,6 +1067,7 @@ public class Model {
 				
 				stmt.execute(reset_num_rents);
 				
+				// Pop up message saying it's all done
 				new addMessage(1);
 				
 				
