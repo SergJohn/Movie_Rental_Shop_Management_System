@@ -723,7 +723,8 @@ public class Model {
 	public void rent(String customer_email, String title1, String rentDate) {
 		
 		// Variable declaration
-		String rent_return = rentDate.substring(0, 8);
+		String rent_return = rentDate.substring(0, 5); //2020-xx-xx
+		String middle = "-";
 		String cust_id;
 		String subscription;
 		String type;
@@ -731,14 +732,18 @@ public class Model {
 		
 		// Simple validation to calculate return date
 		int day = Integer.parseInt(rentDate.substring(8, 10));
+		int month = Integer.parseInt(rentDate.substring(4, 7));
 		
 		if(day > 28) {
 			day = day - 27;
+			month = month - 1;
+			rent_return = rent_return.concat(Integer.toString(month)).concat(middle).concat(Integer.toString(day));
 		}else {
 			day = day + 3;
+			rent_return = rent_return.concat(Integer.toString(month)).concat(middle).concat(Integer.toString(day));
 		}
 		
-		rent_return = rent_return.concat(Integer.toString(day));
+		//rent_return = rent_return.concat(Integer.toString(day));
 		
 		
 		try {
