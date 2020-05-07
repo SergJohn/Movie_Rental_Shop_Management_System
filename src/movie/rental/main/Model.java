@@ -648,11 +648,12 @@ public class Model {
 		try {
 			
 			String query = "SELECT * FROM customers;";
-			String query_two = "SELECT memberships_membership_id, cust_id, cust_name, "
-					+ " cust_phone_no, cust_email, cust_address, cust_points, cust_rents "
-					+ " FROM subscriptions " 
-					+ " INNER JOIN customers " 
-					+ " ON subscriptions.customers_cust_id = customers.cust_id "
+			String query_two = "SELECT membership_name, cust_id, cust_name, cust_phone_no, cust_email, " 
+					+ " cust_address, cust_points, cust_rents FROM customers "
+					+ " INNER JOIN subscriptions "
+					+ " ON subscriptions.customers_cust_id = customers.cust_id " 
+					+ " INNER JOIN memberships " 
+					+ " ON subscriptions.memberships_membership_id = memberships.membership_id "
 					+ " WHERE cust_id LIKE '%"+customer+"%' OR "
 					+ " cust_name LIKE '%"+customer+"%' OR "
 					+ " cust_phone_no LIKE '%"+customer+"%' OR "
@@ -674,7 +675,7 @@ public class Model {
 			int row = 0;
 			
 			while(rs2.next()) {
-				System.out.println(rs2.getString("memberships_membership_id") + "\t" +
+				System.out.println(rs2.getString("membership_name") + "\t" +
 									rs2.getString("cust_id") + "\t" + 
 									rs2.getString("cust_name") + "\t" +
 									rs2.getString("cust_phone_no") + "\t" +
@@ -684,7 +685,7 @@ public class Model {
 									rs2.getString("cust_rents"));
 				
 				// Adding data from DB into Data[][]
-				data[row][0] = rs2.getString("memberships_membership_id");
+				data[row][0] = rs2.getString("membership_name");
 				data[row][1] = rs2.getString("cust_id");
 				data[row][2] = rs2.getString("cust_name");
 				data[row][3] = rs2.getString("cust_phone_no");
