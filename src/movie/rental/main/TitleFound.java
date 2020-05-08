@@ -34,7 +34,7 @@ public class TitleFound extends JFrame{
 	
 	private void components(String title) {
 
-        // Here we will have all the components to load the View of Movie's list
+        // Here we will have all the components to load the View of title's list
 		// Border Layout
 		BorderLayout border = new BorderLayout();
 		this.setLayout(border);
@@ -61,7 +61,7 @@ public class TitleFound extends JFrame{
 		// Label
 		JLabel welcomeLabel = new JLabel("Title Found");
 		
-		// Table with movie's list
+		// Table with title's list
 		
 		String[][] data = null;
 		

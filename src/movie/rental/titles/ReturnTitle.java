@@ -38,7 +38,7 @@ public class ReturnTitle extends JFrame {
 	
 	private void components() {
 
-        // Here we will have all the components to load the Rent view
+        // Here we will have all the components to load the ReturnTitle's view
 		// Border Layout
 		BorderLayout border = new BorderLayout();
 		this.setLayout(border);

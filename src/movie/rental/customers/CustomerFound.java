@@ -36,7 +36,7 @@ public class CustomerFound extends JFrame {
 	
 	private void components(String customer) {
 
-        // Here we will have all the components to load the View of Movie's list
+        // Here we will have all the components to load the View of customer's list
 		// Border Layout
 		BorderLayout border = new BorderLayout();
 		this.setLayout(border);
@@ -63,7 +63,7 @@ public class CustomerFound extends JFrame {
 		// Label
 		JLabel welcomeLabel = new JLabel("Customer Found");
 		
-		// Table with movie's list
+		// Table with customer's list
 		
 		String[][] data = null;
 		

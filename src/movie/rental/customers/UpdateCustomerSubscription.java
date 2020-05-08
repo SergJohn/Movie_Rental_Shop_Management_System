@@ -41,7 +41,7 @@ public class UpdateCustomerSubscription extends JFrame{
 	
 	private void components() {
 
-        // Here we will have all the components to load the View of AddNewTitle Class
+        // Here we will have all the components to load the View of UpdateCustomerSubscription's Class
 		// Border Layout
 		BorderLayout border = new BorderLayout();
 		this.setLayout(border);
@@ -97,6 +97,7 @@ public class UpdateCustomerSubscription extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
+				// This will clear the textFields when triggered
 				if(e.getActionCommand().equals("clear")) {
 					email.setText(null);
 					subscription.setText(null);

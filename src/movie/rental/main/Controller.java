@@ -284,6 +284,7 @@ public class Controller implements ActionListener {
 		// Renting
 		else if(e.getActionCommand().equals("make_rent")) {
 			
+			// Getting data from textFields
 			String customer_email = rentDash.customer.getText(); 
 			String title1 = rentDash.title1.getText();
 			String rentDate = rentDash.rentDate.getText();

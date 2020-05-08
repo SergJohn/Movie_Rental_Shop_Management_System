@@ -102,6 +102,7 @@ public class AddNewCustomer extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
+				// this will clear the form when 'called'
 				if(e.getActionCommand().equals("clear")) {
 					name.setText(null);
 					phone.setText(null);
